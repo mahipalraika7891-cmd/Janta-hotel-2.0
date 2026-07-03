@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janta Sweets Restaurant & Hotel | Jayal, Nagaur, Rajasthan</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Janta Sweets Restaurant & Hotel - Jayal, Nagaur mein best hotel aur restaurant. AC, Non-AC aur Family Hall rooms available. Rajasthani khana, mithai aur room booking ke liye call karein: +91 9414863285.">
+<meta name="keywords" content="Janta Sweets Hotel, Jayal Hotel, Nagaur Hotel, Hotel in Jayal, Restaurant Jayal, Janta Hotel Nagaur, room booking Jayal, Rajasthan hotel, Tehsil Choraha hotel">
+<meta name="author" content="Janta Sweets Restaurant & Hotel">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://jantahotel.netlify.app/">
+
+<!-- Open Graph (WhatsApp/Facebook pe link share hone par dikhega) -->
+<meta property="og:title" content="Janta Sweets Restaurant & Hotel | Jayal, Nagaur">
+<meta property="og:description" content="AC, Non-AC aur Family Hall rooms. Rajasthani khana aur mithai. Tehsil Choraha, Jayal, Nagaur, Rajasthan.">
+<meta property="og:image" content="https://i.ibb.co/C3b5V9Gt/hotel-building-cropped.jpg">
+<meta property="og:type" content="business.business">
+<meta property="og:locale" content="hi_IN">
+
+<!-- Local Business Schema (Google ko batata hai ki ye ek local business hai) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Janta Sweets Restaurant & Hotel",
+  "image": "https://i.ibb.co/C3b5V9Gt/hotel-building-cropped.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Tehsil Choraha",
+    "addressLocality": "Jayal",
+    "addressRegion": "Rajasthan",
+    "addressCountry": "IN",
+    "postalCode": "341022"
+  },
+  "telephone": "+919414863285",
+  "servesCuisine": "Rajasthani",
+  "priceRange": "₹₹",
+  "openingHours": "Mo-Su 09:00-00:30"
+}
+
+  // === Hindi/English Toggle ===
+  let isHindi = true;
+  function toggleLang(){
+    isHindi = !isHindi;
+    document.querySelectorAll('[data-hi]').forEach(el=>{
+      el.textContent = isHindi ? el.getAttribute('data-hi') : el.getAttribute('data-en');
+    });
+    document.getElementById('langBtn').textContent = isHindi ? 'हि / EN' : 'EN / हि';
+  }
+
+  // === Star Rating ===
+  let selectedRating = 0;
+  function setRating(val){
+    selectedRating = val;
+    document.querySelectorAll('#starSelect span').forEach((s,i)=>{
+      s.classList.toggle('active', i < val);
+    });
+  }
+
+  // === Submit Review ===
+  function submitReview(){
+    const name = document.getElementById('rName').value.trim();
+    const text = document.getElementById('rText').value.trim();
+    if(!name || !text || selectedRating === 0){
+      alert('Kripya naam, rating aur review bharein!');
+      return;
+    }
+    const stars = '★'.repeat(selectedRating) + '☆'.repeat(5-selectedRating);
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `<div class="review-stars">${stars}</div><p class="review-text">"${text}"</p><div class="review-author">${name}</div><div class="review-date">Abhi abhi</div>`;
+    document.getElementById('reviewsGrid').appendChild(card);
+    document.getElementById('rName').value='';
+    document.getElementById('rText').value='';
+    setRating(0);
+    document.getElementById('reviewForm').classList.remove('active');
+    const toast = document.getElementById('toast');
+    toast.textContent = 'Review add ho gaya! Shukriya 🙏';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+  }
+
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon: #7A2426;
+    --maroon-deep: #4E1517;
+    --gold: #C8962C;
+    --gold-light: #E8C572;
+    --sandstone: #E8D3A9;
+    --cream: #FBF3E3;
+    --ink: #2A1810;
+    --teal: #0F4C46;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+  }
+  .hindi{font-family:'Mukta',sans-serif;}
+  h1,h2,h3,.display{font-family:'Cormorant Garamond',serif;}
+
+  /* ===== Jharokha arch shape — signature element ===== */
+  .arch-top{
+    position:relative;
+  }
+  .arch-top::before{
+    content:"";
+    position:absolute;
+    top:-1px; left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    height:40px;
+    background:inherit;
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(78,21,23,0.96);
+    backdrop-filter:blur(6px);
+    border-bottom:2px solid var(--gold);
+  }
+  .nav{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+  }
+  .brand{
+    color:var(--gold-light);
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem; font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .brand span{display:block; font-size:0.6rem; font-family:'Poppins'; letter-spacing:3px; color:var(--sandstone); text-transform:uppercase; margin-top:-2px;}
+  nav ul{display:flex; gap:28px; list-style:none;}
+  nav ul li a{color:var(--sandstone); text-decoration:none; font-size:0.85rem; letter-spacing:0.5px; transition:color .2s;}
+  nav ul li a:hover{color:var(--gold-light);}
+  .call-btn{
+    background:var(--gold);
+    color:var(--maroon-deep);
+    padding:9px 20px;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.85rem;
+    letter-spacing:0.5px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  }
+  .menu-toggle{display:none;}
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(ellipse at top, rgba(200,150,44,0.15), transparent 60%),
+      linear-gradient(160deg, var(--maroon-deep) 0%, var(--maroon) 55%, #5e1a1c 100%);
+    overflow:hidden;
+    padding:120px 24px 80px;
+  }
+  .hero::before{
+    /* lattice pattern echoing jaali screens */
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(232,197,114,0.04) 0, rgba(232,197,114,0.04) 1px, transparent 1px, transparent 26px),
+      repeating-linear-gradient(-45deg, rgba(232,197,114,0.04) 0, rgba(232,197,114,0.04) 1px, transparent 1px, transparent 26px);
+    pointer-events:none;
+  }
+  .hero-arch{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:780px;
+  }
+  .hero-eyebrow{
+    color:var(--gold-light);
+    font-size:0.8rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    font-weight:500;
+  }
+  .hero h1{
+    color:var(--cream);
+    font-size:clamp(2.8rem, 7vw, 5.2rem);
+    line-height:1.05;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .hero h1 em{color:var(--gold-light); font-style:normal;}
+  .hero-hindi{
+    color:var(--sandstone);
+    font-family:'Mukta',sans-serif;
+    font-size:1.4rem;
+    margin-bottom:22px;
+    letter-spacing:1px;
+  }
+  .hero p.tagline{
+    color:var(--sandstone);
+    font-size:1.05rem;
+    max-width:520px;
+    margin:0 auto 36px;
+    line-height:1.7;
+  }
+  .hero-cta{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+  .btn-primary, .btn-ghost{
+    padding:14px 32px;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+    letter-spacing:0.5px;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--maroon-deep);
+    box-shadow:0 4px 18px rgba(200,150,44,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border:1.5px solid var(--gold-light);
+    color:var(--gold-light);
+  }
+  .btn-ghost:hover{background:rgba(232,197,114,0.1); transform:translateY(-2px);}
+
+  .address-strip{
+    position:relative; z-index:2;
+    margin-top:48px;
+    display:flex; align-items:center; gap:10px;
+    color:var(--sandstone);
+    font-size:0.85rem;
+    letter-spacing:0.5px;
+    border-top:1px solid rgba(232,197,114,0.25);
+    padding-top:18px;
+  }
+  .pin{color:var(--gold-light);}
+
+  /* ===== Section shared ===== */
+  section{padding:90px 24px;}
+  .section-inner{max-width:1140px; margin:0 auto;}
+  .eyebrow{
+    color:var(--maroon);
+    font-size:0.78rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .section-title{
+    font-size:clamp(2rem, 4vw, 2.8rem);
+    font-weight:700;
+    margin-bottom:18px;
+    color:var(--maroon-deep);
+  }
+  .section-sub{
+    color:#5c4636;
+    max-width:600px;
+    line-height:1.7;
+    font-size:0.98rem;
+  }
+
+  /* ===== About ===== */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;
+  }
+  .about-photo{
+    aspect-ratio:4/5;
+    background:linear-gradient(135deg,#d9c79a,#c9a567);
+    border-radius:0 0 50% 50% / 0 0 18% 18%;
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    border:6px solid var(--cream);
+    box-shadow:0 18px 40px rgba(78,21,23,0.18);
+  }
+  .about-photo span{
+    color:rgba(78,21,23,0.5);
+    font-size:0.85rem;
+    text-align:center;
+    padding:20px;
+    font-style:italic;
+  }
+  .about-stats{display:flex; gap:36px; margin-top:34px; flex-wrap:wrap;}
+  .stat{}
+  .stat b{display:block; font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--maroon);}
+  .stat span{font-size:0.78rem; letter-spacing:1px; color:#7a6450; text-transform:uppercase;}
+
+  /* ===== Menu highlights ===== */
+  .menu-section{background:var(--maroon-deep); color:var(--cream);}
+  .menu-section .eyebrow{color:var(--gold-light);}
+  .menu-section .section-title{color:var(--cream);}
+  .menu-section .section-sub{color:var(--sandstone);}
+  .menu-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    margin-top:50px;
+    background:rgba(232,197,114,0.25);
+    border:1px solid rgba(232,197,114,0.25);
+  }
+  .menu-cat{
+    background:var(--maroon-deep);
+    padding:36px 28px;
+  }
+  .menu-cat h3{
+    color:var(--gold-light);
+    font-size:1.5rem;
+    margin-bottom:18px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(232,197,114,0.25);
+  }
+  .menu-cat ul{list-style:none;}
+  .menu-cat li{
+    display:flex; justify-content:space-between;
+    padding:8px 0;
+    font-size:0.92rem;
+    color:var(--sandstone);
+    border-bottom:1px dashed rgba(232,197,114,0.12);
+  }
+  .menu-cat li:last-child{border-bottom:none;}
+
+  /* ===== Rooms ===== */
+  .rooms-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+    margin-top:50px;
+  }
+  .room-card{
+    background:#fff;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(78,21,23,0.08);
+    border:1px solid rgba(122,36,38,0.1);
+    display:flex; flex-direction:column;
+  }
+  .room-photo{
+    height:170px;
+    background:linear-gradient(135deg,#e8d3a9,#d4b885);
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .room-photo::after{
+    content:"";
+    position:absolute; bottom:0; left:0; right:0;
+    height:50%;
+    background:linear-gradient(to top, rgba(42,24,16,0.25), transparent);
+  }
+  .room-photo span{color:rgba(78,21,23,0.45); font-size:0.8rem; font-style:italic; z-index:1;}
+  .room-badge{
+    position:absolute; top:14px; left:14px;
+    background:var(--gold);
+    color:var(--maroon-deep);
+    font-size:0.7rem; font-weight:700; letter-spacing:0.5px;
+    padding:5px 12px; border-radius:2px; z-index:1;
+  }
+  .room-body{padding:24px; flex:1; display:flex; flex-direction:column;}
+  .room-body h3{font-size:1.5rem; color:var(--maroon-deep); margin-bottom:6px;}
+  .room-price{color:var(--maroon); font-weight:600; font-size:1.1rem; margin-bottom:14px;}
+  .room-price span{font-size:0.78rem; color:#8a7460; font-weight:400;}
+  .room-body ul{list-style:none; margin-bottom:20px; flex:1;}
+  .room-body li{
+    font-size:0.85rem; color:#5c4636; padding:4px 0; padding-left:18px; position:relative;
+  }
+  .room-body li::before{
+    content:"✦"; position:absolute; left:0; color:var(--gold); font-size:0.7rem; top:7px;
+  }
+  .room-select{
+    width:100%; padding:11px; background:var(--maroon); color:#fff; border:none;
+    border-radius:2px; font-weight:600; letter-spacing:0.5px; cursor:pointer; font-size:0.85rem;
+    transition:background .2s;
+  }
+  .room-select:hover{background:var(--maroon-deep);}
+
+  /* ===== Enquiry form ===== */
+  .enquiry-section{
+    background:var(--sandstone);
+    background-image: radial-gradient(rgba(122,36,38,0.06) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  .enquiry-wrap{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    background:#fff;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(78,21,23,0.15);
+  }
+  .enquiry-side{
+    background:linear-gradient(160deg, var(--maroon), var(--maroon-deep));
+    color:var(--cream);
+    padding:48px 40px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .enquiry-side h3{font-size:2rem; color:var(--gold-light); margin-bottom:16px;}
+  .enquiry-side p{color:var(--sandstone); font-size:0.92rem; line-height:1.7; margin-bottom:28px;}
+  .call-large{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:var(--maroon-deep);
+    padding:14px 26px; border-radius:2px; text-decoration:none;
+    font-weight:700; font-size:1rem; width:fit-content;
+  }
+  .enquiry-form{padding:48px 40px;}
+  .enquiry-form h3{color:var(--maroon-deep); font-size:1.6rem; margin-bottom:24px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block; font-size:0.78rem; letter-spacing:0.5px; color:#7a6450; margin-bottom:6px; text-transform:uppercase; font-weight:600;}
+  .form-group input, .form-group select, .form-group textarea{
+    width:100%; padding:11px 14px; border:1.5px solid #e0d0b5; border-radius:3px;
+    font-family:'Poppins'; font-size:0.92rem; background:#fdf9f2; color:var(--ink);
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus{
+    outline:none; border-color:var(--maroon);
+  }
+  .submit-btn{
+    width:100%; padding:14px; background:var(--maroon); color:#fff; border:none;
+    border-radius:3px; font-weight:700; font-size:0.95rem; letter-spacing:0.5px; cursor:pointer;
+    transition:background .2s;
+  }
+  .submit-btn:hover{background:var(--maroon-deep);}
+  .form-note{font-size:0.78rem; color:#8a7460; margin-top:10px; text-align:center;}
+
+  /* ===== Location ===== */
+  .location-section{padding-bottom:60px;}
+  .location-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .location-card{
+    background:#fff; border-radius:6px; padding:36px;
+    box-shadow:0 10px 30px rgba(78,21,23,0.08);
+    border-left:4px solid var(--gold);
+  }
+  .location-card h3{color:var(--maroon-deep); font-size:1.5rem; margin-bottom:18px;}
+  .loc-item{display:flex; gap:14px; margin-bottom:18px;}
+  .loc-icon{color:var(--gold); font-size:1.1rem; flex-shrink:0;}
+  .loc-item div b{display:block; color:var(--ink); font-size:0.92rem; margin-bottom:2px;}
+  .loc-item div span{color:#7a6450; font-size:0.88rem;}
+  .map-embed{
+    border-radius:6px; overflow:hidden; box-shadow:0 10px 30px rgba(78,21,23,0.12);
+    aspect-ratio:1/1; border:1px solid #e0d0b5;
+  }
+  .map-embed iframe{width:100%; height:100%; border:0;}
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--maroon-deep); color:var(--sandstone);
+    padding:40px 24px; text-align:center;
+  }
+  footer .brand{margin-bottom:10px; justify-content:center; display:flex; flex-direction:column; align-items:center;}
+  footer p{font-size:0.8rem; color:#a98e76;}
+
+  /* Toast */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px);
+    background:var(--maroon-deep); color:var(--gold-light); padding:14px 28px; border-radius:4px;
+    font-size:0.9rem; box-shadow:0 10px 30px rgba(0,0,0,0.3); z-index:999; opacity:0;
+    transition:all .35s ease; border:1px solid var(--gold);
+  }
+  .toast.show{transform:translateX(-50%) translateY(0); opacity:1;}
+
+  @media (max-width:860px){
+    nav ul{display:none;}
+    .about-grid, .menu-grid, .rooms-grid, .enquiry-wrap, .location-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .enquiry-side{padding:36px 28px;}
+    .enquiry-form{padding:36px 28px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--gold); outline-offset:2px;
+  }
+
+  /* ===== Reviews ===== */
+  .reviews-section{background:var(--sandstone); background-image:radial-gradient(rgba(122,36,38,0.05) 1px,transparent 1px); background-size:18px 18px;}
+  .reviews-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px;}
+  .review-card{background:#fff; border-radius:6px; padding:28px; box-shadow:0 8px 24px rgba(78,21,23,0.08); border-top:3px solid var(--gold); position:relative;}
+  .review-card::before{content:'"'; position:absolute; top:10px; right:16px; font-size:4rem; color:var(--gold); opacity:0.2; font-family:'Cormorant Garamond',serif; line-height:1;}
+  .review-stars{color:var(--gold); font-size:1rem; margin-bottom:10px;}
+  .review-text{color:#5c4636; font-size:0.9rem; line-height:1.7; margin-bottom:16px; font-style:italic;}
+  .review-author{font-weight:700; color:var(--maroon-deep); font-size:0.85rem;}
+  .review-date{color:#a08060; font-size:0.75rem;}
+  .add-review-btn{display:inline-block; margin-top:32px; background:var(--maroon); color:#fff; padding:12px 28px; border-radius:3px; text-decoration:none; font-weight:600; font-size:0.9rem; border:none; cursor:pointer;}
+  .review-form-wrap{display:none; background:#fff; border-radius:6px; padding:32px; margin-top:24px; box-shadow:0 8px 24px rgba(78,21,23,0.08);}
+  .review-form-wrap.active{display:block;}
+  .star-select{display:flex; gap:8px; margin-bottom:16px;}
+  .star-select span{font-size:1.6rem; cursor:pointer; color:#ddd; transition:color .15s;}
+  .star-select span.active{color:var(--gold);}
+  @media(max-width:860px){.reviews-grid{grid-template-columns:1fr;}}
+
+  /* ===== Gallery ===== */
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:44px;}
+  .gallery-item{aspect-ratio:1/1; overflow:hidden; border-radius:6px; cursor:pointer; position:relative; box-shadow:0 4px 16px rgba(78,21,23,0.12);}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; transition:transform .3s;}
+  .gallery-item:hover img{transform:scale(1.06);}
+  .gallery-item .overlay{position:absolute;inset:0;background:rgba(78,21,23,0);transition:.3s;display:flex;align-items:center;justify-content:center;}
+  .gallery-item:hover .overlay{background:rgba(78,21,23,0.3);}
+  @media(max-width:860px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">Janta Sweets <span>Restaurant &amp; Hotel</span></div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Restaurant</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#enquiry">Book a Room</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
+    </nav>
+    <button onclick="toggleLang()" id="langBtn" style="background:var(--gold);color:var(--maroon-deep);border:none;padding:9px 16px;border-radius:2px;font-weight:700;font-size:0.82rem;cursor:pointer;margin-right:8px;">हि / EN</button>
+    <a href="tel:+919414863285" class="call-btn">📞 Call Now</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-arch">
+    <div class="hero-eyebrow">Tehsil Choraha · Jayal · Nagaur · Rajasthan</div>
+    <h1>Janta Sweets<br><em>Restaurant &amp; Hotel</em></h1>
+    <div class="hero-hindi hindi">जनता स्वीट्स रेस्टोरेंट एंड होटल</div>
+    <p class="tagline">Asli Rajasthani swaad aur aaramdayak rooms — ek hi chhat ke neeche. Mithai, thali aur thaharne ki suvidha, sab Jayal mein.</p>
+    <div class="hero-cta">
+      <a href="#rooms" class="btn-primary">Rooms Dekhein</a>
+      <a href="tel:+919414863285" class="btn-ghost">📞 Abhi Call Karein</a>
+      <a href="https://wa.me/919414863285?text=Namaste%2C%20mujhe%20room%20booking%20ke%20baare%20mein%20jaankari%20chahiye" style="display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:#25D366;color:#fff;padding:12px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:0.9rem;">💬 WhatsApp Karein</a>
+    </div>
+    <div class="address-strip">
+      <span class="pin">📍</span>
+      <span>Janta Sweets Restaurant &amp; Hotel, Tehsil Choraha, Jayal, Nagaur, Rajasthan</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner about-grid">
+    <div class="about-photo" style="background-image:url('https://i.ibb.co/C3b5V9Gt/hotel-building-cropped.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat;"></div>
+    <div style="margin-top:24px;border-radius:12px;overflow:hidden;box-shadow:0 12px 35px rgba(78,21,23,0.22);border:3px solid #C8962C;"><div style="background:linear-gradient(135deg,#4E1517,#7A2426);padding:10px 16px;text-align:center;"><span style="color:#E8C572;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;font-family:Poppins,sans-serif;">✦ Hotel Overview ✦</span></div><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://www.youtube.com/embed/vCmPgGt_8As" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media" allowfullscreen></iframe></div><div style="background:linear-gradient(135deg,#4E1517,#7A2426);padding:8px 16px;text-align:center;"><span style="color:#E8D3A9;font-size:0.72rem;letter-spacing:1px;font-family:Poppins,sans-serif;">Tehsil Choraha, Jayal, Nagaur, Rajasthan</span></div></div>
+    <div class="eyebrow">Hamare Baare Mein</div>
+      <h2 class="section-title">Jayal ka Bharosemand Naam</h2>
+      <p class="section-sub">Janta Sweets, Tehsil Choraha Jayal mein varso se mithai aur khane-peene ki sewa de raha hai. Apne hotel mein aaramdayak rooms bhi shuru kiye hain — chahe aap parivar ke saath ho ya safar par, yahan aapko ghar jaisa anubhav milega.</p>
+      <div class="about-stats">
+        <div class="stat"><b>10+</b><span>Saal ka Anubhav</span></div>
+        <div class="stat"><b>3</b><span>Room Categories</span></div>
+        <div class="stat"><b>100%</b><span>Shudh Shakahari</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="menu-section">
+  <div class="section-inner">
+    <div class="eyebrow">Restaurant</div>
+    <h2 class="section-title">Khaas Vyanjan</h2>
+    <p class="section-sub">Taza, shudh aur swadisht — Rajasthani thali se lekar mithaiyon tak.</p>
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>Mithaiyan</h3>
+        <ul>
+          <li><span>Gulab Jamun</span></li>
+          <li><span>Rasgulla</span></li>
+          <li><span>Kaju Katli</span></li>
+          <li><span>Ghewar (Seasonal)</span></li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <h3>Rajasthani Thali</h3>
+        <ul>
+          <li><span>Dal Baati Churma</span></li>
+          <li><span>Gatte ki Sabzi</span></li>
+          <li><span>Ker Sangri</span></li>
+          <li><span>Bajre ki Roti</span></li>
+          <li><span>All Paneer Varieties</span></li>
+        </ul>
+        <div class="menu-cat">
+        <h3>Fast Food</h3>
+        <ul>
+          <li><span>Pizza</span></li>
+          <li><span>Burger</span></li>
+          <li><span>Sandwich</span></li>
+          <li><span>Dosha</span></li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <h3>Nashta &amp; Chai</h3>
+        <ul>
+          <li><span>Kachori-Samosa</span></li>
+          <li><span>Poha-Jalebi</span></li>
+          <li><span>Lassi</span></li>
+          <li><span>Masala Chai</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms">
+  <div class="section-inner">
+    <div class="eyebrow">Hotel Rooms</div>
+    <h2 class="section-title">Apna Room Chunein</h2>
+    <p class="section-sub">Saaf-suthre, aaramdayak rooms — har budget aur zaroorat ke liye.</p>
+    <div class="rooms-grid">
+
+      <div class="room-card">
+        <div class="room-photo" style="background-image:url('https://i.ibb.co/Y7SpmPPF/68f23fe4313cb.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat;"><span class="room-badge">Non-AC</span></div>
+        <div class="room-body">
+          <h3>Non-AC Room</h3>
+          <div class="room-price">₹800 <span>/ raat</span></div>
+          <ul>
+            <li>Single Bed</li>
+            <li>Not Attached Bathroom</li>
+            <li>Ceiling Fan</li>
+            <li>Free Drinking Water</li>
+          </ul>
+          <button class="room-select" data-room="Non-AC Room (₹800/raat)">Enquiry Bhejein</button>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-photo" style="background-image:url('https://i.ibb.co/v4WGsZv1/Untitled-design-94.png'); background-size:cover; background-position:center; background-repeat:no-repeat;"><span class="room-badge">AC</span></div>
+        <div class="room-body">
+          <h3>AC Room</h3>
+          <div class="room-price">₹1,000 <span>/ raat</span></div>
+          <ul>
+            <li>Double Bed</li>
+            <li>Split AC</li>
+            <li>Attached Bathroom + Geyser</li>
+          </ul>
+          <button class="room-select" data-room="AC Room (₹1000/raat)">Enquiry Bhejein</button>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-photo" style="background-image:url('https://i.ibb.co/chcFFcm7/n14-scaled.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat;"><span class="room-badge">Family Hall</span></div>
+        <div class="room-body">
+          <h3>Family Hall</h3>
+          <div class="room-price">₹1,500 <span>/ raat</span></div>
+          <ul>
+            <li>King Size Bed</li>
+            <li>Split AC</li>
+            <li>Not Attached Bathroom</li>
+            <li>Three Beds</li>
+          </ul>
+          <button class="room-select" data-room="Family Hall (₹1500/raat)">Enquiry Bhejein</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="enquiry" class="enquiry-section">
+  <div class="section-inner">
+    <div class="enquiry-wrap">
+      <div class="enquiry-side">
+        <h3>Booking ke liye<br>Call Karein</h3>
+        <p>Room available hai ya nahi, price aur khaali tareekh jaanne ke liye seedhe call karein — hum turant madad karenge. Ya neeche form bharein, hum aapko call back karenge.</p>
+        <a href="tel:+91 94148 63285" class="call-large">📞 +919414863285</a>
+      </div>
+      <div class="enquiry-form">
+        <h3>Room Enquiry Form</h3>
+        <form id="bookingForm"><input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+<input type="hidden" id="formTime" value="">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Naam</label>
+              <input type="text" id="name" placeholder="Aapka naam" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="10-digit number" required pattern="[0-9]{10}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkin">Check-in Date</label>
+              <input type="date" id="checkin" required>
+            </div>
+            <div class="form-group">
+              <label for="roomtype">Room Type</label>
+              <select id="roomtype" required>
+                <option value="">Select</option>
+                <option>Non-AC Room (₹800/raat)</option>
+                <option>AC Room (₹1000/raat)</option>
+                <option>Family Hall (₹1500/raat)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="msg">Extra Jaankari (Optional)</label>
+            <textarea id="msg" rows="3" placeholder="Kitne din ke liye, kitne log, koi khaas zaroorat..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Enquiry Bhejein</button>
+          <p class="form-note">Form submit karne ke baad hamari team aapko call/WhatsApp karegi.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="section-inner location-grid">
+    <div class="location-card">
+      <h3>Hamse Sampark Karein</h3>
+      <div class="loc-item">
+        <div class="loc-icon">📍</div>
+        <div><b>Address</b><span>Janta Sweets Restaurant &amp; Hotel, Tehsil Choraha, Jayal, District Nagaur, Rajasthan</span></div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">📞</div>
+        <div><b>Phone</b><span>+919414863285</span></div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">🕒</div>
+        <div><b>Restaurant Timing</b><span>Subah 9:00 baje se raat 12:30 baje tak</span></div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">🏨</div>
+        <div><b>Reception</b><span>24 Ghante Khula</span></div>
+      </div>
+      <a href="tel:+919414863285" class="btn-primary" style="display:inline-block; margin-top:10px; background:var(--maroon); color:#fff;">📞 Call Karein</a>
+    </div>
+    <div class="map-embed">
+      <iframe src="https://maps.google.com/maps?q=Janta+Hotel+and+Restaurant+Jayal+Nagaur+Rajasthan&output=embed" style="width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="gallery">
+  <div class="section-inner">
+    <div class="eyebrow" data-hi="Tasveerein" data-en="Gallery">Tasveerein</div>
+    <h2 class="section-title" data-hi="Hotel ki Jhalak" data-en="Hotel Gallery">Hotel ki Jhalak</h2>
+    <p class="section-sub" data-hi="Hamare hotel aur restaurant ki tasveerein" data-en="Photos of our hotel and restaurant">Hamare hotel aur restaurant ki tasveerein</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://i.ibb.co/C3b5V9Gt/hotel-building-cropped.jpg" alt="Hotel Building"><div class="overlay"></div></div>
+      <div class="gallery-item"><img src="https://i.ibb.co/Y7SpmPPF/68f23fe4313cb.jpg" alt="Non-AC Room"><div class="overlay"></div></div>
+      <div class="gallery-item"><img src="https://i.ibb.co/v4WGsZv1/Untitled-design-94.png" alt="AC Room"><div class="overlay"></div></div>
+      <div class="gallery-item"><img src="https://i.ibb.co/chcFFcm7/n14-scaled.jpg" alt="Family Hall"><div class="overlay"></div></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e8d3a9,#c9a567);display:flex;align-items:center;justify-content:center;"><span style="color:rgba(78,21,23,0.4);font-size:0.8rem;font-style:italic;">[ Aur photos aayengi ]</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e8d3a9,#c9a567);display:flex;align-items:center;justify-content:center;"><span style="color:rgba(78,21,23,0.4);font-size:0.8rem;font-style:italic;">[ Aur photos aayengi ]</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-section">
+  <div class="section-inner">
+    <div class="eyebrow" data-hi="Hamare Mehmaan" data-en="Our Guests">Hamare Mehmaan</div>
+    <h2 class="section-title" data-hi="Unke Anubhav" data-en="Their Experience">Unke Anubhav</h2>
+    <p class="section-sub" data-hi="Janta Hotel mein ruke logo ne kya kaha" data-en="What our guests said about Janta Hotel">Janta Hotel mein ruke logo ne kya kaha</p>
+    <div class="reviews-grid" id="reviewsGrid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Bahut achha hotel hai, rooms saaf aur aaram deh hain. Khana bhi bahut swadisht tha. Zaroor aaunga dobara!"</p>
+        <div class="review-author">Ramesh Kumar</div>
+        <div class="review-date">Nagaur, Rajasthan</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Family ke saath ruke, bahut achhi service mili. Dal Baati Churma lajawab tha. Hotel staff bahut helpful hai."</p>
+        <div class="review-author">Suresh Sharma</div>
+        <div class="review-date">Jodhpur, Rajasthan</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"AC room bahut comfortable tha. Location bhi achhi hai — Jayal mein sabse best hotel yahi hai!"</p>
+        <div class="review-author">Mahesh Patel</div>
+        <div class="review-date">Jaipur, Rajasthan</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="add-review-btn" onclick="document.getElementById('reviewForm').classList.toggle('active')">✍️ Apna Review Likhein</button>
+    </div>
+
+    <div class="review-form-wrap" id="reviewForm">
+      <h3 style="color:var(--maroon-deep);font-size:1.4rem;margin-bottom:20px;">Apna Anubhav Share Karein</h3>
+      <div class="form-group">
+        <label style="font-size:0.78rem;letter-spacing:0.5px;color:#7a6450;text-transform:uppercase;font-weight:600;">Rating</label>
+        <div class="star-select" id="starSelect">
+          <span onclick="setRating(1)">★</span>
+          <span onclick="setRating(2)">★</span>
+          <span onclick="setRating(3)">★</span>
+          <span onclick="setRating(4)">★</span>
+          <span onclick="setRating(5)">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label style="font-size:0.78rem;letter-spacing:0.5px;color:#7a6450;text-transform:uppercase;font-weight:600;">Naam</label>
+        <input type="text" id="rName" placeholder="Aapka naam" style="width:100%;padding:11px 14px;border:1.5px solid #e0d0b5;border-radius:3px;font-family:Poppins;font-size:0.92rem;">
+      </div>
+      <div class="form-group" style="margin-top:12px;">
+        <label style="font-size:0.78rem;letter-spacing:0.5px;color:#7a6450;text-transform:uppercase;font-weight:600;">Review</label>
+        <textarea id="rText" rows="3" placeholder="Apna anubhav likhein..." style="width:100%;padding:11px 14px;border:1.5px solid #e0d0b5;border-radius:3px;font-family:Poppins;font-size:0.92rem;"></textarea>
+      </div>
+      <button onclick="submitReview()" style="margin-top:12px;padding:12px 28px;background:var(--maroon);color:#fff;border:none;border-radius:3px;font-weight:700;cursor:pointer;">Review Submit Karein</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Janta Sweets <span>Restaurant &amp; Hotel</span></div>
+  <p>Tehsil Choraha, Jayal, Nagaur, Rajasthan</p>
+  <p style="margin-top:8px;">© 2026 Janta Sweets. Sabhi adhikar surakshit.</p>
+</footer>
+
+<div class="toast" id="toast">Enquiry bhej di gayi! Hum jaldi aapse sampark karenge.</div>
+
+<script>
+  // Pre-fill room type when "Enquiry Bhejein" is clicked on a room card
+  document.querySelectorAll('.room-select').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.getElementById('roomtype').value = btn.getAttribute('data-room');
+      document.getElementById('enquiry').scrollIntoView({behavior:'smooth', block:'start'});
+      document.getElementById('name').focus();
+    });
+  });
+
+  // Form submit -> opens WhatsApp prefilled message as fallback (no backend available)
+  document.getElementById('formTime').value = Date.now();
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const honeypot = this.querySelector('input[name="website"]').value;
+  const timeDiff = Date.now() - parseInt(document.getElementById('formTime').value);
+  if(honeypot || timeDiff < 3000){
+    alert('Spam detected! Please try again.');
+    return;
+  }
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const checkin = document.getElementById('checkin').value;
+    const roomtype = document.getElementById('roomtype').value;
+    const msg = document.getElementById('msg').value;
+
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3500);
+
+    const text = encodeURIComponent(
+      `Room Booking Enquiry - Janta Sweets Hotel\nNaam: ${name}\nPhone: ${phone}\nCheck-in: ${checkin}\nRoom: ${roomtype}\nMessage: ${msg || '-'}`
+    );
+    // Opens WhatsApp chat with owner's number prefilled with enquiry details
+    window.open(`https://wa.me/919414863285?text=${text}`, '_blank');
+
+    this.reset();
+  });
+
+  // === Hindi/English Toggle ===
+  let isHindi = true;
+  function toggleLang(){
+    isHindi = !isHindi;
+    document.querySelectorAll('[data-hi]').forEach(el=>{
+      el.textContent = isHindi ? el.getAttribute('data-hi') : el.getAttribute('data-en');
+    });
+    document.getElementById('langBtn').textContent = isHindi ? 'हि / EN' : 'EN / हि';
+  }
+
+  // === Star Rating ===
+  let selectedRating = 0;
+  function setRating(val){
+    selectedRating = val;
+    document.querySelectorAll('#starSelect span').forEach((s,i)=>{
+      s.classList.toggle('active', i < val);
+    });
+  }
+
+  // === Submit Review ===
+  function submitReview(){
+    const name = document.getElementById('rName').value.trim();
+    const text = document.getElementById('rText').value.trim();
+    if(!name || !text || selectedRating === 0){
+      alert('Kripya naam, rating aur review bharein!');
+      return;
+    }
+    const stars = '★'.repeat(selectedRating) + '☆'.repeat(5-selectedRating);
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `<div class="review-stars">${stars}</div><p class="review-text">"${text}"</p><div class="review-author">${name}</div><div class="review-date">Abhi abhi</div>`;
+    document.getElementById('reviewsGrid').appendChild(card);
+    document.getElementById('rName').value='';
+    document.getElementById('rText').value='';
+    setRating(0);
+    document.getElementById('reviewForm').classList.remove('active');
+    const toast = document.getElementById('toast');
+    toast.textContent = 'Review add ho gaya! Shukriya 🙏';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+  }
+
+</script>
+
+</body>
+</html>
